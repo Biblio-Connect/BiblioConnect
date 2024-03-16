@@ -4,7 +4,13 @@ import { useMediaQuery } from "react-responsive";
 import { useTheme } from "../contexts/themeContext";
 import { FaMoon, FaSun } from "react-icons/fa";
 
-const links = [{ to: "/", text: "Home" }];
+const links = [
+  { to: "/", text: "Home" },
+  { to: "/", text: "Home" },
+  { to: "/", text: "Home" },
+  { to: "/", text: "Home" },
+  
+];
 
 const Links: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
   const location = useLocation();
@@ -15,7 +21,9 @@ const Links: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
         <Link
           key={link.to}
           to={link.to}
-          className={`py-4 px-4 hover:font-extrabold text-4xl md:text-lg ${location.pathname === link.to ? "font-extrabold" : ""} text-center`}
+          className={`py-4 px-4 hover:font-extrabold text-4xl md:text-lg ${
+            location.pathname === link.to ? "font-extrabold" : ""
+          } text-center`}
           onClick={onClick}
         >
           {link.text}
@@ -50,40 +58,46 @@ const Navbar: React.FC = () => {
   };
 
   const getStyleForMobileNavbar = (): string => {
-    const mobileNavbarStyle = `fixed top-24 left-0 w-screen rounded-br-lg rounded-bl-lg ${getThemeCSS()} flex flex-col 
-        transition-opacity transition-height`;
-
+    const mobileNavbarStyle = `fixed top-24 left-0 w-screen rounded-br-lg rounded-bl-lg ${getThemeCSS()} flex flex-col transition-opacity transition-height`;
     return isMobile
       ? `${mobileNavbarStyle} ${isOpen ? "opacity-100 h-auto" : "opacity-0 h-0"}`
-      : "w-full flex justify-around items-center";
+      : "w-full flex justify-center space-x-4 items-center";
+  };
+
+  const handleMenuClick = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
     <div
       className={`w-full text-center flex justify-between px-4 h-24 md:h-16 items-center ${getThemeCSS()}`}
     >
-      <div className="flex items-center w-full">
-        <button
-          className="text-6xl md:invisible"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          ☰
-        </button>
-        <div className={`mx-auto ${isMobile ? "justify-center" : ""}`}>
-          <img
-            src={`/BiblioConnect${theme === "light" ? "Light" : "Dark"}.svg`}
-            alt="Logo"
-            className="max-h-14"
-          />
-        </div>
-        <div className={getStyleForMobileNavbar()}>
-          {(isOpen || !isMobile) && <Links onClick={() => setIsOpen(false)} />}
+      <div className="flex justify-between w-full items-center">
+        <div className="items-center">
+          {isMobile && (
+            <button className="text-6xl" onClick={handleMenuClick}>
+              ☰
+            </button>
+          )}
           {!isMobile && (
+            <img
+              src={`/BiblioConnect${theme === "light" ? "Light" : "Dark"}.svg`}
+              alt="Logo"
+              className="max-h-14"
+            />
+          )}
+        </div>
+        <div className={`items-center ${getStyleForMobileNavbar()}`}>
+          {(isOpen || !isMobile) && <Links onClick={handleMenuClick} />}
+        </div>
+        <div className="items-center">
+          {isMobile ? (
+            <ThemeToggleButton onClick={toggleTheme} theme={theme} />
+          ) : (
             <ThemeToggleButton onClick={toggleTheme} theme={theme} />
           )}
         </div>
       </div>
-      {isMobile && <ThemeToggleButton onClick={toggleTheme} theme={theme} />}
     </div>
   );
 };
