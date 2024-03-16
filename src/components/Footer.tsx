@@ -22,8 +22,10 @@ const Footer: React.FC = () => {
       className={`relative bottom-0 py-4 w-full text-center ${theme === "light" ? "bg-light-mode text-dark-mode" : "bg-dark-mode text-light-mode"}`}
     >
       <p>
-        Made by Jonathan Ding, {getLinkElement("https://seanfinch.com", "Sean Finch")}, Eric Huang, and {getLinkElement("https://shishirpokhrel.com", "Shishir Pokhrel")} • Made for{" "}
-        {getLinkElement("https://pawhacks.io", "PawHacks 2024")}
+        Made by Jonathan Ding,{" "}
+        {getLinkElement("https://seanfinch.com", "Sean Finch")}, Eric Huang, and{" "}
+        {getLinkElement("https://shishirpokhrel.com", "Shishir Pokhrel")} • Made
+        for {getLinkElement("https://pawhacks.io", "PawHacks 2024")}
       </p>
     </footer>
   );

@@ -4,9 +4,7 @@ import { useMediaQuery } from "react-responsive";
 import { useTheme } from "../contexts/themeContext";
 import { FaMoon, FaSun } from "react-icons/fa";
 
-const links = [
-  { to: "/", text: "Home" },
-];
+const links = [{ to: "/", text: "Home" }];
 
 const Links: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
   const location = useLocation();
