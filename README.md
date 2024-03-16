@@ -1,32 +1,48 @@
-# React + TypeScript + Vite
+# Biblio Connect
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+BiblioConnect is a revolutionary book suggesting app that takes a unique approach to connecting book lovers with their next great read. Say goodbye to endless scrolling through book lists and hello to personalized book recommendations tailored to your tastes.
 
-Currently, two official plugins are available:
+## How It Works
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+    1. Discover Books: Start by exploring a curated selection of books chosen just for you. Swipe right if you're interested in reading the book or swipe left to pass.
 
-## Expanding the ESLint configuration
+    2. Get Recommendations: Based on your swipes, BiblioConnect's intelligent recommendation engine will analyze your preferences and suggest a new set of books that you're likely to enjoy.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+    3. Find Your Next Read: Whether you're into romance, mystery, fantasy, or non-fiction, BiblioConnect has something for everyone. Discover hidden gems, bestsellers, and niche titles that match your interests.
 
-- Configure the top-level `parserOptions` property like this:
+    4. Save and Share: Save your favorite books to your profile for easy access later. Share your reading list with friends, connect with other users who share your taste in books, and discuss your latest reads in the app's community forum.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
+### Why BiblioConnect?
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+* **Personalized Recommendations:** Say goodbye to generic book lists. BiblioConnect uses your swipes to tailor recommendations specifically to your reading preferences.
+* **Endless Possibilities:** With a vast library of books spanning all genres and categories, there's always something new and exciting to discover.
+* **Community Engagement:** Connect with other book lovers, join discussions, and share recommendations in a vibrant and supportive community of readers.
 
-# BiblioConnect
+### Getting Started
+
+Ready to find your next great read? Sign up for BiblioConnect today and embark on a personalized journey through the world of literature. Swipe, discover, and connect with books that speak to your soul. Happy reading!
+
+## Built With
+
+* [React](https://react.dev/) - A JavaScript library for building user interfaces.
+* [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework that provides low-level utility classes to build custom designs.
+* [MongoDB](https://www.mongodb.com/) - A NoSQL database used for storing and managing the application's data.
+
+## Authors
+
+* **Sean Finch** (https://seanfinch.com/)
+
+* **Eric Huang** 
+
+* **Shishir Pokhrel** (https://shishirpokhrel.com)
+
+* **Jonathan**
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Inspired by Tinder and our love for books *nerd emoji*
+
