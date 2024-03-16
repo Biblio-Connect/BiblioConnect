@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface SignupFormProps {
   onSignup: (email: string, password: string) => void;
 }
 
 const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();

@@ -14,9 +14,9 @@ BiblioConnect is a revolutionary book suggesting app that takes a unique approac
 
 ### Why BiblioConnect?
 
-* **Personalized Recommendations:** Say goodbye to generic book lists. BiblioConnect uses your swipes to tailor recommendations specifically to your reading preferences.
-* **Endless Possibilities:** With a vast library of books spanning all genres and categories, there's always something new and exciting to discover.
-* **Community Engagement:** Connect with other book lovers, join discussions, and share recommendations in a vibrant and supportive community of readers.
+- **Personalized Recommendations:** Say goodbye to generic book lists. BiblioConnect uses your swipes to tailor recommendations specifically to your reading preferences.
+- **Endless Possibilities:** With a vast library of books spanning all genres and categories, there's always something new and exciting to discover.
+- **Community Engagement:** Connect with other book lovers, join discussions, and share recommendations in a vibrant and supportive community of readers.
 
 ### Getting Started
 
@@ -24,19 +24,19 @@ Ready to find your next great read? Sign up for BiblioConnect today and embark o
 
 ## Built With
 
-* [React](https://react.dev/) - A JavaScript library for building user interfaces.
-* [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework that provides low-level utility classes to build custom designs.
-* [MongoDB](https://www.mongodb.com/) - A NoSQL database used for storing and managing the application's data.
+- [React](https://react.dev/) - A JavaScript library for building user interfaces.
+- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework that provides low-level utility classes to build custom designs.
+- [MongoDB](https://www.mongodb.com/) - A NoSQL database used for storing and managing the application's data.
 
 ## Authors
 
-* **Sean Finch** (https://seanfinch.com/)
+- **Sean Finch** (https://seanfinch.com/)
 
-* **Eric Huang** 
+- **Eric Huang**
 
-* **Shishir Pokhrel** (https://shishirpokhrel.com)
+- **Shishir Pokhrel** (https://shishirpokhrel.com)
 
-* **Jonathan**
+- **Jonathan**
 
 ## License
 
@@ -44,5 +44,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Inspired by Tinder and our love for books *nerd emoji*
-
+- Inspired by Tinder and our love for books _nerd emoji_

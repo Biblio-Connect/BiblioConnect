@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./contexts/themeContext";
 import Layout from "./layouts/Layout";
 import Home from "./pages/Home";
+import Binder from "./pages/biblio";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 
-const AppRoutes = ({ onLogin, onSignup }: { onLogin: (email: string, password: string) => void; onSignup: (email: string, password: string) => void; }) => (
+const AppRoutes = ({
+  onLogin,
+  onSignup,
+}: {
+  onLogin: (email: string, password: string) => void;
+  onSignup: (email: string, password: string) => void;
+}) => (
   <Routes>
     <Route path="/" element={<Home />} />
+    <Route path="/binder" element={<Binder />} />
     <Route path="/login" element={<Login onLogin={onLogin} />} />
     <Route path="/signup" element={<Signup onSignup={onSignup} />} />
     <Route path="*" element={<NotFound />} />
@@ -19,12 +27,12 @@ const AppRoutes = ({ onLogin, onSignup }: { onLogin: (email: string, password: s
 const App: React.FC = () => {
   const handleLogin = (email: string, password: string) => {
     // Implement login logic here
-    console.log('Logging in with:', email, password);
+    console.log("Logging in with:", email, password);
   };
 
   const handleSignup = (email: string, password: string) => {
     // Implement signup logic here
-    console.log('Signing up with:', email, password);
+    console.log("Signing up with:", email, password);
   };
 
   return (
