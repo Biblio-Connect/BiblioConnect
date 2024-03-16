@@ -7,21 +7,31 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 
-const AppRoutes = () => (
+const AppRoutes = ({ onLogin, onSignup }: { onLogin: (email: string, password: string) => void; onSignup: (email: string, password: string) => void; }) => (
   <Routes>
     <Route path="/" element={<Home />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/signup" element={<Signup />} />
+    <Route path="/login" element={<Login onLogin={onLogin} />} />
+    <Route path="/signup" element={<Signup onSignup={onSignup} />} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 );
 
 const App: React.FC = () => {
+  const handleLogin = (email: string, password: string) => {
+    // Implement login logic here
+    console.log('Logging in with:', email, password);
+  };
+
+  const handleSignup = (email: string, password: string) => {
+    // Implement signup logic here
+    console.log('Signing up with:', email, password);
+  };
+
   return (
     <ThemeProvider>
       <Router>
         <Layout>
-          <AppRoutes />
+          <AppRoutes onLogin={handleLogin} onSignup={handleSignup} />
         </Layout>
       </Router>
     </ThemeProvider>
