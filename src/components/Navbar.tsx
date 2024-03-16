@@ -6,10 +6,7 @@ import { FaMoon, FaSun } from "react-icons/fa";
 
 const links = [
   { to: "/", text: "Home" },
-  { to: "/", text: "Home" },
-  { to: "/", text: "Home" },
-  { to: "/", text: "Home" },
-  
+  { to: "/profile", text: "Profile" },
 ];
 
 const Links: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
@@ -21,10 +18,12 @@ const Links: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
         <Link
           key={link.to}
           to={link.to}
-          className={`py-4 px-4 hover:font-extrabold text-4xl md:text-lg ${
+          className={`py-4 px-4 text-center hover:font-extrabold text-4xl md:text-lg ${
             location.pathname === link.to ? "font-extrabold" : ""
-          } text-center`}
+          }`}
           onClick={onClick}
+          // Add a fixed width to prevent resizing due to font weight changes
+          style={{ width: "100px" }} // Adjust as needed
         >
           {link.text}
         </Link>
@@ -37,7 +36,7 @@ const ThemeToggleButton: React.FC<{ onClick: () => void; theme: string }> = ({
   onClick,
   theme,
 }) => (
-  <button onClick={onClick} className="text-5xl md:text-xl">
+  <button onClick={onClick} className="text-5xl md:text-3xl md:ml-4">
     {theme === "light" ? <FaMoon /> : <FaSun />}
   </button>
 );
