@@ -24,6 +24,12 @@ const Links: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
   );
 };
 
+const ThemeToggleButton: React.FC<{ onClick: () => void, theme: string }> = ({ onClick, theme }) => (
+  <button onClick={onClick} className="text-5xl md:text-xl">
+    {theme === "light" ? <FaMoon /> : <FaSun />}
+  </button>
+);
+
 const Navbar: React.FC = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const [isOpen, setIsOpen] = useState(false);
@@ -60,26 +66,14 @@ const Navbar: React.FC = () => {
           ☰
         </button>
         <div className={`mx-auto ${isMobile ? 'justify-center' : ''}`}>
-          {theme === "light" ? (
-            <img src="/BiblioConnectLight.svg" alt="Logo" className="max-h-14" />
-          ) : (
-            <img src="/BiblioConnectDark.svg" alt="Logo" className="max-h-14" />
-          )}
+          <img src={`/BiblioConnect${theme === "light" ? "Light" : "Dark"}.svg`} alt="Logo" className="max-h-14" />
         </div>
         <div className={getStyleForMobileNavbar()}>
           {(isOpen || !isMobile) && <Links onClick={() => setIsOpen(false)} />}
-          {!isMobile && (
-            <button onClick={toggleTheme} className="text-5xl md:text-xl">
-              {theme === "light" ? <FaMoon /> : <FaSun />}
-            </button>
-          )}
+          {!isMobile && <ThemeToggleButton onClick={toggleTheme} theme={theme} />}
         </div>
       </div>
-      {isMobile && (
-        <button onClick={toggleTheme} className="text-5xl md:text-xl">
-          {theme === "light" ? <FaMoon /> : <FaSun />}
-        </button>
-      )}
+      {isMobile && <ThemeToggleButton onClick={toggleTheme} theme={theme} />}
     </div>
   );
 };
