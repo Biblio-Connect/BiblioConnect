@@ -32,7 +32,7 @@ const NotFound: React.FC = () => {
   const { theme } = useTheme();
 
   useEffect(() => {
-    document.title = "Error 404 - Sean Finch • SoCal";
+    document.title = "Error 404 - BiblioConnect";
   }, []);
 
   return (
