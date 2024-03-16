@@ -22,8 +22,7 @@ const Links: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
             location.pathname === link.to ? "font-extrabold" : ""
           }`}
           onClick={onClick}
-          // Add a fixed width to prevent resizing due to font weight changes
-          style={{ width: "100px" }} // Adjust as needed
+          style={{ width: "100px" }}
         >
           {link.text}
         </Link>
