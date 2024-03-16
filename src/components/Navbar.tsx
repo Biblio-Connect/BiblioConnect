@@ -59,6 +59,13 @@ const Navbar: React.FC = () => {
         >
           ☰
         </button>
+        <div className={`mx-auto ${isMobile ? 'justify-center' : ''}`}>
+          {theme === "light" ? (
+            <img src="/BiblioConnectLight.svg" alt="Logo" className="max-h-14" />
+          ) : (
+            <img src="/BiblioConnectDark.svg" alt="Logo" className="max-h-14" />
+          )}
+        </div>
         <div className={getStyleForMobileNavbar()}>
           {(isOpen || !isMobile) && <Links onClick={() => setIsOpen(false)} />}
           {!isMobile && (
