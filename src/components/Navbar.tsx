@@ -8,6 +8,7 @@ const links = [{ to: "/", text: "Home" }];
 
 const Links: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
   const location = useLocation();
+
   return (
     <>
       {links.map((link) => (
@@ -24,7 +25,10 @@ const Links: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
   );
 };
 
-const ThemeToggleButton: React.FC<{ onClick: () => void, theme: string }> = ({ onClick, theme }) => (
+const ThemeToggleButton: React.FC<{ onClick: () => void; theme: string }> = ({
+  onClick,
+  theme,
+}) => (
   <button onClick={onClick} className="text-5xl md:text-xl">
     {theme === "light" ? <FaMoon /> : <FaSun />}
   </button>
@@ -46,11 +50,11 @@ const Navbar: React.FC = () => {
   };
 
   const getStyleForMobileNavbar = (): string => {
+    const mobileNavbarStyle = `fixed top-24 left-0 w-screen rounded-br-lg rounded-bl-lg ${getThemeCSS()} flex flex-col 
+        transition-opacity transition-height`;
+
     return isMobile
-      ? `fixed top-24 left-0 w-screen rounded-br-lg rounded-bl-lg ${getThemeCSS()} flex flex-col 
-        transition-opacity transition-height ${
-          isOpen ? "opacity-100 h-auto" : "opacity-0 h-0"
-        }`
+      ? `${mobileNavbarStyle} ${isOpen ? "opacity-100 h-auto" : "opacity-0 h-0"}`
       : "w-full flex justify-around items-center";
   };
 
@@ -65,12 +69,18 @@ const Navbar: React.FC = () => {
         >
           ☰
         </button>
-        <div className={`mx-auto ${isMobile ? 'justify-center' : ''}`}>
-          <img src={`/BiblioConnect${theme === "light" ? "Light" : "Dark"}.svg`} alt="Logo" className="max-h-14" />
+        <div className={`mx-auto ${isMobile ? "justify-center" : ""}`}>
+          <img
+            src={`/BiblioConnect${theme === "light" ? "Light" : "Dark"}.svg`}
+            alt="Logo"
+            className="max-h-14"
+          />
         </div>
         <div className={getStyleForMobileNavbar()}>
           {(isOpen || !isMobile) && <Links onClick={() => setIsOpen(false)} />}
-          {!isMobile && <ThemeToggleButton onClick={toggleTheme} theme={theme} />}
+          {!isMobile && (
+            <ThemeToggleButton onClick={toggleTheme} theme={theme} />
+          )}
         </div>
       </div>
       {isMobile && <ThemeToggleButton onClick={toggleTheme} theme={theme} />}

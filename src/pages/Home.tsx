@@ -13,9 +13,7 @@ function Home() {
     >
       <div className="w-full">
         <div className="flex flex-col items-center text-center">
-          <p className="mb-4 mx-4 text-4xl font-bold">
-            BiblioConnect
-          </p>
+          <p className="mb-4 mx-4 text-4xl font-bold">BiblioConnect</p>
         </div>
         <div className="flex flex-col items-center text-center">
           <p className="mb-4 mx-4 font-bold">
