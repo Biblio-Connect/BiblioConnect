@@ -1,7 +1,6 @@
 import React from "react";
 import { useTheme } from "../contexts/themeContext";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 type Book = {
   BookID: number;
