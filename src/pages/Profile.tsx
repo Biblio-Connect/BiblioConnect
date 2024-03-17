@@ -1,15 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTheme } from "../contexts/themeContext";
 import { FaArrowRight } from "react-icons/fa";
 import LinkButton from "../components/LinkButton";
 
-type Genre = {
-  Genres: string;
-};
-
 function Profile() {
   const { theme } = useTheme();
-  const [genres, setGenres] = useState<Genre[]>([]);
 
   useEffect(() => {
     document.title = "Profile - BiblioConnect";
@@ -17,29 +12,50 @@ function Profile() {
     if (!email) {
       window.location.href = "/login";
     }
-
-    const recommendedBooks = async () => {
-      const response = await fetch("http://localhost:3333/api/genre");
-      const data = await response.json();
-      console.log(data);
-      setGenres(data.genres);
-    }
-    recommendedBooks();
-  }, []);
-
+    }, []);
+    
   return (
     <div
-      className={`flex justify-center ${theme === "light" ? "bg-light-mode text-ultra-dark-mode" : "bg-dark-mode text-light-mode"}`}
+      className={`${theme === "light" ? "bg-light-mode text-ultra-dark-mode" : "bg-dark-mode text-light-mode"}`}
     >
-      <div className="w-full flex flex-col items-center text-center">
-        <div>
-          <p className="mb-4 mx-4 font-bold">{genres[0].Genres || 'undef'}</p>
-        </div>
-        <div>
-          <p className="mb-4 mx-4 font-bold">Books you might like</p>
-          <div>
-            {genres.map((genre, index) => (<p key={index}>{`Genre ${genre.Genres} at Index ${index}`}</p>))}
+      <div className="min-h-screen flex flex-col items-center"> 
+      <p className="mb-4 mx-4 font-bold">Email</p> 
+      <p className="mb-4 mx-4 font-bold">{localStorage.getItem("email")}</p> 
+        <div className=" flex flex-row items-center my-4 justify-center w-full">
+          <div className=" shadow-lg rounded-lg overflow-hidden flex justify-center items-center">
+            <img
+              src={"https://m.media-amazon.com/images/I/51-OsLmkHBL._SY445_SX342_.jpg"}
+              alt="Placeholder"
+              className="object-cover"
+            />
           </div>
+        </div>
+        <div className="p-4">
+          <h2
+            className={`text-center font-semibold text-6xl mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
+          >
+            {"Rebecca"}
+          </h2>
+          <p
+            className={`mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
+          >
+            {"Daphne du Maurier"}
+          </p>
+          <p
+            className={`mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
+          >
+            {"Thriller"}
+          </p>
+          <p
+            className={`mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
+          >
+            Chapters: {"27"}
+          </p>
+          <p
+            className={`mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
+          >
+            {"A young woman marries a wealthy widower, but the shadow of his deceased wife looms large."}
+          </p>
         </div>
         <LinkButton link="/howitworks">
           <FaArrowRight className="mr-2" />
