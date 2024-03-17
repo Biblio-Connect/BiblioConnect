@@ -2,22 +2,44 @@ import React from "react";
 import { useTheme } from "../contexts/themeContext";
 import { useState, useEffect } from "react";
 
-const Binder: React.FC = () => {
-  const [profileIndex, setProfileIndex] = useState(0);
-  const profiles = ["Author", "Genres", "Chapter", "Description"]; // Replace this with your actual profiles
+type Book = {
+  Author: string;
+  Chapters: string;
+  Description: string;
+  Genres: string;
+  ImageURL: string;
+  Name: string;
+};
 
-  const getItems = async () => {
-    const items = await fetch("/api/items");
-    console.log(items);
+const Binder: React.FC = () => {
+  const [bookIndex, setBookIndex] = useState(0);
+  const [books, setBooks] = useState<Book[]>([{
+    Author: "undef",
+    Chapters: "undef",
+    Description: "undef",
+    Genres: "undef",
+    ImageURL: "undef",
+    Name: "undef",
+  }]);
+
+  const getBooks = async () => {
+    const response = await fetch("http://localhost:3333/api/items");
+    const data = await response.json();
+    console.log(data);
+    setBooks(data);
   };
+
   useEffect(() => {
-    getItems();
+    getBooks();
   }, []);
 
   const handleButtonClick = () => {
-    setProfileIndex((prevIndex) => (prevIndex + 1) % profiles.length);
+    if(books.length > 0 && bookIndex < books.length - 1){
+    setBookIndex((prevIndex) => (prevIndex + 1) % books.length);}
   };
+  
   const { theme } = useTheme();
+
   return (
     <div
       className={`${theme === "light" ? "bg-light-mode text-ultra-dark-mode" : "bg-dark-mode text-light-mode"}`}
@@ -25,7 +47,7 @@ const Binder: React.FC = () => {
       <div className="min-h-screen flex flex-col items-center">
         <div className=" flex flex-row items-center my-4 justify-center w-full">
           <div className="flex-grow flex justify-center">
-            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleButtonClick()}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -44,13 +66,13 @@ const Binder: React.FC = () => {
           </div>
           <div className=" shadow-lg rounded-lg overflow-hidden flex justify-center items-center">
             <img
-              src="https://m.media-amazon.com/images/I/71u2rYjpD8L._SY522_.jpg"
+              src={books[bookIndex].ImageURL}
               alt="Placeholder"
               className="object-cover"
             />
           </div>
           <div className="flex-grow flex justify-center">
-            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleButtonClick()}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -72,42 +94,31 @@ const Binder: React.FC = () => {
           <h2
             className={`text-center font-semibold text-6xl mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
           >
-            Name
+            {books[bookIndex].Name}
           </h2>
           <p
             className={`mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
           >
-            Author
+            {books[bookIndex].Author}
           </p>
           <p
             className={`mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
           >
-            Genres
+            {books[bookIndex].Genres}
           </p>
           <p
             className={`mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
           >
-            Chapter
+            {books[bookIndex].Chapters}
           </p>
           <p
             className={`mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
           >
-            Description
+            {books[bookIndex].Description}
           </p>
         </div>
       </div>
-
-      <div>
-        <div>
-          <button onClick={handleButtonClick}>Green Button</button>
-          <p
-            className={`mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
-          >
-            {profiles[profileIndex]}
-          </p>
-        </div>
       </div>
-    </div>
   );
 };
 
