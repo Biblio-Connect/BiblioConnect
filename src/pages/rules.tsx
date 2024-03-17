@@ -34,42 +34,33 @@ const Rules: React.FC = () => {
     <div
       className={`min-w-screen flex flex-col justify-center items-center text-center ${theme === "light" ? "bg-light-mode text-ultra-dark-mode" : "bg-dark-mode text-light-mode"}`}
     >
+      <div className="my-10 text-7xl text-center font-bold ">How It Works</div>
       <div>
-        <div className="my-10 text-7xl text-center font-bold ">Rules</div>
-
-        <div className="mb-1 text-3xl font-serif font-bold">General Rules:</div>
-        <div className="mb-1 ml-3 text-lg font-mono">
-          • The web-app is one person, outside help is allowed.
+        <div className="my-4 text-3xl font-bold">To start:</div>
+        <div className="mb-10 text-lg font-mono">
+          • Signup/Login with your email and password.
           <br />
-          • Click "Green" if you like the books, "Red" if you dont like it.
-          <br />
-          • Click on it until there is no more left!
-          <br />
-          <br />
-          <br />
+          • Read these guidelines!
         </div>
       </div>
 
-      <div className="mb-1 ml-3 text-3xl font-serif font-bold">Gameplay:</div>
-      <div className="mb-1 ml-3 text-lg font-mono">
-        <div>
-          • You get certain amounts of books.
+      <div>
+        <div className="my-4 text-3xl font-bold">When you're ready to start getting suggestions:</div>
+        <div className="mb-10 text-lg font-mono">
+          • Press "Get Started" at the bottom of this page.
           <br />
-          • Click green or red depending on your preferences.
+          • You will be presented with a book and some information about it.
           <br />
-          • Do it again and again until there is none left.
-          <br />
-          <br />
-          <br />
+          • Click the "check mark" if you might like the book shown based on that information, or the "X" if you dont like it.
+          <br />• Continue until there are no more left!
         </div>
       </div>
 
-      <div className="mb-1 text-3xl font-serif font-bold">Ending:</div>
-      <div className="mb-1 text-lg font-mono">
-        Once you are done, we will show you 2 recommendations of books you might
-        like. <br />
-        <br />
-        <br />
+      <div>
+        <div className="my-4 text-3xl font-bold">Once you are done:</div>
+        <div className="mb-10 text-lg font-mono">
+          We will give you 2 recommendations of books you might like based on your choices.
+        </div>
       </div>
       <Button>
         <FaArrowRight className="mr-2" />
