@@ -1,5 +1,4 @@
 import React from "react";
-import { TbBrandTinder } from "react-icons/tb";
 import { useTheme } from "../contexts/themeContext";
 
 const Binder: React.FC = () => {

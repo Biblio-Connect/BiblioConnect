@@ -33,8 +33,8 @@ app.get("/api/items", (req, res) => {
 
 // get the rest of fantasy
 app.get("/api/fantasy", (req, res) => {
-    console.log("API Request:", req.url);
-    const statement = `
+  console.log("API Request:", req.url);
+  const statement = `
     SELECT 
         ImageURL, 
         Name, 
@@ -44,17 +44,15 @@ app.get("/api/fantasy", (req, res) => {
         Description
     FROM Books
     WHERE Author = "C.S. Lewis" OR Author = "Michael Ende";`;
-    db.all(statement, (err, rows) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json(rows);
-    });
+  db.all(statement, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
   });
-  
-
-app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
 });
 
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
+});
