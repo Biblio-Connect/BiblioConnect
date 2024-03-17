@@ -172,7 +172,7 @@ app.get("/api/thriller", (req, res) => {
 app.get("/api/genre", (req, res) => {
   console.log("API Request:", req.url);
   const statement = `
-    SELECT GenreCounts.Genres, GenreCounts.LikedCount AS MaxLikedCount
+    SELECT GenreCounts.Genres
     FROM (
         SELECT Books.Genres, COUNT(*) AS LikedCount
         FROM Books
@@ -223,3 +223,21 @@ app.post("/api/likedBooks", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
+
+// Delete Certain User's Data
+app.post("/api/deleteData", async (req, res) => {
+    const { Email } = req.body;
+    try {
+      await db.run("DELETE FROM SwipeOutput WHERE SwipeOutput.Email = ?;", 
+      [Email]);
+      res.status(201).json({ message: "Data Deleted Successfully" });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Data Not Deleted Successfully" });
+    }
+  });
+  
+  app.listen(PORT, () => {
+    console.log(`Server is running at http://localhost:${PORT}`);
+  });
+  
