@@ -19,7 +19,7 @@ const Button: React.FC<ButtonProps> = ({ children }) => {
   }`;
 
   const goToPage = () => {
-    navigate("/signup");
+    navigate("/login");
   };
 
   return (

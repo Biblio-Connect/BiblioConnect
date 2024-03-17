@@ -52,11 +52,11 @@ app.get("/api/fantasy", (req, res) => {
     res.json(rows);
   });
 });
- 
+
 // get the rest of science fiction
 app.get("/api/science-fiction", (req, res) => {
-    console.log("API Request:", req.url);
-    const statement = `
+  console.log("API Request:", req.url);
+  const statement = `
     SELECT 
         ImageURL, 
         Name, 
@@ -66,19 +66,19 @@ app.get("/api/science-fiction", (req, res) => {
         Description
     FROM Books
     WHERE Author = "Douglas Adams" OR Author = "Ray Bradbury";`;
-    db.all(statement, (err, rows) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json(rows);
-    });
+  db.all(statement, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
   });
+});
 
 // get the rest of romance
 app.get("/api/romance", (req, res) => {
-    console.log("API Request:", req.url);
-    const statement = `
+  console.log("API Request:", req.url);
+  const statement = `
     SELECT 
         ImageURL, 
         Name, 
@@ -88,19 +88,19 @@ app.get("/api/romance", (req, res) => {
         Description
     FROM Books
     WHERE Author = "Audrey Niffeneggar" OR Author = "Casey McQuiston";`;
-    db.all(statement, (err, rows) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json(rows);
-    });
+  db.all(statement, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
   });
+});
 
 // get the rest of thriller
 app.get("/api/thriller", (req, res) => {
-    console.log("API Request:", req.url);
-    const statement = `
+  console.log("API Request:", req.url);
+  const statement = `
     SELECT 
         ImageURL, 
         Name, 
@@ -110,14 +110,14 @@ app.get("/api/thriller", (req, res) => {
         Description
     FROM Books
     WHERE Author = "Agatha Christie" OR Author = "Daphne du Maurier";`;
-    db.all(statement, (err, rows) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json(rows);
-    });
+  db.all(statement, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
   });
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
