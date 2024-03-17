@@ -45,7 +45,8 @@ CREATE TABLE Users  (
 CREATE TABLE SwipeOutput (
     BookID INTEGER,
     Email TEXT,
-    FOREIGN KEY (email) REFERENCES Users(Email),
+    PRIMARY KEY (BookID, Email),
+    FOREIGN KEY (Email) REFERENCES Users(Email),
     FOREIGN KEY (BookID) REFERENCES Books(BookID)
 );
 

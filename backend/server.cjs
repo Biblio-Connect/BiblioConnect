@@ -84,7 +84,13 @@ app.get("/api/items", (req, res) => {
 app.get("/api/fantasy", (req, res) => {
   console.log("API Request:", req.url);
   const statement = `
-    SELECT *
+    SELECT 
+        ImageURL, 
+        Name, 
+        Author,
+        Genres,
+        Chapters, 
+        Description
     FROM Books
     WHERE Author = "C.S. Lewis" OR Author = "Michael Ende";`;
   db.all(statement, (err, rows) => {
