@@ -32,7 +32,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({ link, children }) => {
 
 const handleSignup = async (email: string, password: string, go: () => void) => {
   try {
-    const response = await fetch("http://localhost:3333/api/signup", {
+    const response = await fetch("http://localhost:3333/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -46,12 +46,12 @@ const handleSignup = async (email: string, password: string, go: () => void) => 
       "Data from API",
       JSON.stringify({ email: data.email, message: data.message }),
     );
-    if (data.email) {
-      localStorage.setItem("email", data.email);
-      console.log("Signup in successfully with token:", data.email);
+    console.log(JSON.stringify(data));
+    if(data.message === 'Registration successful') {
+      console.log("Registered successfully with token:", data.email);
       go();
     } else {
-      console.log(data.message);
+      console.log("Registration Failed", data.message);
     }
   } catch (err) {
     console.error("Error during signup:", err);
