@@ -40,19 +40,10 @@ function Profile() {
     >
       <div className="w-full flex flex-col items-center text-center">
         <div>
-        <p className="mb-4 mx-4 font-bold">
-            Name
-          </p>
+          <p className="mb-4 mx-4 font-bold">Email</p>
         </div>
         <div>
-          <p className="mb-4 mx-4 font-bold">
-            Email
-          </p>
-        </div>
-        <div>
-          <p className="mb-4 mx-4 font-bold">
-            Books you might like
-          </p>
+          <p className="mb-4 mx-4 font-bold">Books you might like</p>
         </div>
         <Button>
           <FaArrowRight className="mr-2" />
