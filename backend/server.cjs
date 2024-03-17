@@ -163,17 +163,30 @@ app.get("/api/thriller", (req, res) => {
 // get the count for genre
 app.get("/api/genre", (req, res) => {
     console.log("API Request:", req.url);
+    // const statement = `
+    // SELECT Books.Genres, MAX(LikedCount) AS MaxLikedCount
+    // FROM (
+    // SELECT 
+    //     Books.Genres,
+    //     COUNT(SwipeOutput.BookID) AS LikedCount
+    // FROM Books
+    // NATURAL JOIN SwipeOutput 
+    // GROUP BY Books.Genres
+    // ) AS GenreCounts
+    // GROUP BY GenreCounts.Genres;`;
+
+    // this code will get the count for genre
+    // and return the favorite genre
+    const { givenEmail } = req.body;
     const statement = `
-    SELECT Books.Genres, MAX(LikedCount) AS MaxLikedCount
+    SELECT Genres
     FROM (
-    SELECT 
-        Books.Genres,
-        COUNT(SwipeOutput.BookID) AS LikedCount
-    FROM Books
-    NATURAL JOIN SwipeOutput 
-    GROUP BY Books.Genres
-    ) AS GenreCounts
-    GROUP BY GenreCounts.Genres;`;
+      SELECT Genres, count(Genres)
+      FROM Books NATURAL JOIN SwipeOutput
+      WHERE Email = givenEmail
+      GROUP BY Genres;
+      )
+    WHERE count = max(count);`;
     db.all(statement, (err, rows) => {
       if (err) {
         res.status(500).json({ error: err.message });
