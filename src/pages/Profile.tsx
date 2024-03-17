@@ -38,7 +38,7 @@ function Profile() {
         <div>
           <p className="mb-4 mx-4 font-bold">Books you might like</p>
           <div>
-            {/* {genres.map((genre, index) => (<p key={index}>{`Genre ${genre.Genres} at Index ${index}`}</p>))} */}
+            {genres.map((genre, index) => (<p key={index}>{`Genre ${genre.Genres} at Index ${index}`}</p>))}
           </div>
         </div>
         <LinkButton link="/howitworks">
