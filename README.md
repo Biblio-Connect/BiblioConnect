@@ -1,6 +1,6 @@
 # Biblio Connect
 
-BiblioConnect is a revolutionary book suggesting app that takes a unique approach to connecting book lovers with their next great read. Say goodbye to endless scrolling through book lists and hello to personalized book recommendations tailored to your tastes.
+BiblioConnect is a revolutionary book-suggesting app that takes a unique approach to connecting book lovers with their next great read. Say goodbye to endless scrolling through book lists and hello to personalized book recommendations tailored to your tastes.
 
 ## How It Works
 
@@ -26,17 +26,17 @@ Ready to find your next great read? Sign up for BiblioConnect today and embark o
 
 - [React](https://react.dev/) - A JavaScript library for building user interfaces.
 - [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework that provides low-level utility classes to build custom designs.
-- [MongoDB](https://www.mongodb.com/) - A NoSQL database used for storing and managing the application's data.
+- [SQLite](https://www.sqlite.org/) - C-language library that implements a small, fast, self-contained SQL database engine.
 
 ## Authors
 
 - **Sean Finch** (https://seanfinch.com/)
 
-- **Eric Huang**
+- **Eric Huang** (https://www.linkedin.com/in/eric-huang-b5175728b/)
 
 - **Shishir Pokhrel** (https://shishirpokhrel.com)
 
-- **Jonathan**
+- **Jonathan Ding** (https://www.linkedin.com/in/jonathan-ding-54419527b/)
 
 ## License
 
@@ -44,4 +44,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-- Inspired by Tinder and our love for books _nerd emoji_
+- Inspired by Tinder and our love for books 🤓
