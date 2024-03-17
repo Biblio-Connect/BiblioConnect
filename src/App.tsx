@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Binder from "./pages/biblio";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const AppRoutes = ({
@@ -20,6 +21,7 @@ const AppRoutes = ({
     <Route path="/binder" element={<Binder />} />
     <Route path="/login" element={<Login onLogin={onLogin} />} />
     <Route path="/signup" element={<Signup onSignup={onSignup} />} />
+    <Route path="/profile" element={<Profile />} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 );
