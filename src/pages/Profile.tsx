@@ -18,7 +18,7 @@ const Button: React.FC<ButtonProps> = ({ children }) => {
   }`;
 
   const goToPage = () => {
-    navigate("/binder");
+    navigate("/rules");
   };
 
   return (
