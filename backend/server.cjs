@@ -3,57 +3,52 @@ const express = require("express");
 const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("book.sqlite3");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 
 const app = express();
 const PORT = process.env.PORT || 3333;
 app.use(bodyParser.json());
-
 
 // Serve Vite output as static files
 app.use(express.static(path.join(__dirname, "dist")));
 
 // User registration endpoint
 app.post("/api/register", async (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.status(400).json({ message: "Missing required fields" });
-    }
-    try {
-      await db.run(
-        "INSERT INTO Users (email, password) VALUES (?, ?)",
-        [email, password],
-      );
-      res.status(201).json({ message: "Registration successful" });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Error during registration" });
-    }
-  });
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: "Missing required fields" });
+  }
+  try {
+    await db.run("INSERT INTO Users (email, password) VALUES (?, ?)", [
+      email,
+      password,
+    ]);
+    res.status(201).json({ message: "Registration successful" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error during registration" });
+  }
+});
 
 // User login endpoint
 app.post("/api/login", async (req, res) => {
-    const getDatabaseUser = (email) => {
-      return new Promise((resolve, reject) => {
-        db.get(
-          "SELECT * FROM users WHERE user_name = ?",
-          [email],
-          (err, row) => {
-            if (err) {
-              reject(err);
-              return;
-            }
-            resolve(row);
-          },
-        );
+  const getDatabaseUser = (email) => {
+    return new Promise((resolve, reject) => {
+      db.get("SELECT * FROM users WHERE user_name = ?", [email], (err, row) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(row);
       });
-    };
-  
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.status(400).json({ message: "Missing required fields" });
-    }
-    res.status(200).json({message: "Success"});
+    });
+  };
+
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: "Missing required fields" });
+  }
+  res.status(200).json({ message: "Success" });
 });
 
 // get all the initial books
