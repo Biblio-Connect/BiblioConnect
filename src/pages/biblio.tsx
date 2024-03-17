@@ -45,11 +45,14 @@ const Binder: React.FC = () => {
   }, []);
 
   const nextBook = () => {
-    if (bookIndex === books.length - 1) {
+    if (books.length === 0) {
       return;
     }
-    if (books.length > 0 && bookIndex < books.length - 1) {
-      setBookIndex((prevIndex) => (prevIndex + 1) % books.length);
+    const newIndex = (bookIndex + 1) % books.length;
+    setBookIndex(newIndex);
+    if (newIndex === 0) {
+      // Redirect to /profile when reaching the end of the list
+      window.location.href = "/profile";
     }
   };
 
@@ -92,13 +95,13 @@ const Binder: React.FC = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="w-20 h-20"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
@@ -123,13 +126,13 @@ const Binder: React.FC = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="w-20 h-20"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                 />
               </svg>
