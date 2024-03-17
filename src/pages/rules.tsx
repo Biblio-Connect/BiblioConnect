@@ -32,36 +32,34 @@ const Rules: React.FC = () => {
   const { theme } = useTheme();
   return (
     <div
-      className={`min-w-screen  ${theme === "light" ? "bg-light-mode text-ultra-dark-mode" : "bg-dark-mode text-light-mode"}`}
+      className={`min-w-screen flex flex-col justify-center items-center text-center ${theme === "light" ? "bg-light-mode text-ultra-dark-mode" : "bg-dark-mode text-light-mode"}`}
     >
       <div>
-        <h1 className= "">Rules:</h1>
+        <div className= "my-10 text-7xl text-center font-bold ">Rules</div>
 
-        <h2>General Rules</h2>
-        <ol>
-          <li>The web-app is one person, outside help is allowed.</li>
-          <li>
-            Click "Green" if you like the books, "Red" if you dont like it.
-          </li>
-          <li>Click on it until there is no more left!</li>
-        </ol>
+        <div className="mb-1 text-3xl font-serif font-bold">General Rules:</div>
+        <div className= "mb-1 ml-3 text-lg font-mono">
+        • The web-app is one person, outside help is allowed.<br/>
+        • Click "Green" if you like the books, "Red" if you dont like it.<br/>
+        • Click on it until there is no more left!<br/><br/><br/>
+        </div>
+        </div>
 
-        <h2>Setup</h2>
-        <p>Describe the initial setup of the game.</p>
+        <div className="mb-1 ml-3 text-3xl font-serif font-bold">Gameplay:</div>
+        <div className="mb-1 ml-3 text-lg font-mono">
+            <div>
+            • You get certain amounts of books.<br/>
+            • Click green or red depending on your preferences.<br/>
+            • Do it again and again until there is none left.<br/><br/><br/>
+          </div>
+        </div>
 
-        <h2>Gameplay</h2>
-        <ol>
-          <li>You get certain amounts of books.</li>
-          <li>Click green or red depending on your preferences.</li>
-          <li>Do it again and again until there is none left.</li>
-        </ol>
-
-        <h2>Ending</h2>
-        <p>
+        <div className="mb-1 text-3xl font-serif font-bold">Ending:</div>
+        <div className="mb-1 text-lg font-mono">
+        
           Once you are done, we will show you 2 recommendations of books you
-          might{" "}
-        </p>
-      </div>
+          might like. <br/><br/><br/>
+          </div>
       <Button>
         <FaArrowRight className="mr-2" />
         Get started
