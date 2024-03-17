@@ -39,27 +39,18 @@ const App: React.FC = () => {
       console.log("Response from api", response);
       if (response.status === 401) {
         console.log("reached here 401");
-        console.log("Invalid email or password");
-        return;
-      }
-      if (response.status === 500) {
-        console.log("reached here 500");
-        console.log("Server error");
+        console.error("Server error");
         return;
       }
       const data = await response.json();
       if (data.token) {
         localStorage.setItem("token", data.token);
-        setEmail("");
-        setPassword("");
-        setLoggedIn(true);
-        onClose(); // Close the modal
       } else {
-        setErrorMessage(data.message); // Display error message
+        console.error(data.message);
       }
     } catch (err) {
       console.error("Error during login:", err);
-      setErrorMessage("An error occurred. Please try again.");
+      console.error("An error occurred. Please try again.");
     }
   };
   console.log("Logging in with:", email, password);
