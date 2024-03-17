@@ -176,8 +176,8 @@ app.get("/api/thriller", (req, res) => {
 
 // get the count for genre
 app.get("/api/genre", (req, res) => {
-    console.log("API Request:", req.url);
-    const statement = `
+  console.log("API Request:", req.url);
+  const statement = `
 
     SELECT GenreCounts.Genres, GenreCounts.LikedCount AS MaxLikedCount
     FROM (
@@ -197,14 +197,14 @@ app.get("/api/genre", (req, res) => {
     ) AS MaxLikedCounts
     ON GenreCounts.LikedCount = MaxLikedCounts.MaxLikedCount;`;
 
-    db.all(statement, (err, rows) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json(rows);
-    });
+  db.all(statement, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
   });
+});
 // add likedBooks
 app.post("/api/likedBooks", async (req, res) => {
   const { Book_id } = req.body;

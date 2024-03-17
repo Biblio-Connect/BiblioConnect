@@ -39,19 +39,21 @@ const Rules: React.FC = () => {
         <div className="my-4 text-3xl font-bold">To start:</div>
         <div className="mb-10 text-lg font-mono">
           • Signup/Login with your email and password.
-          <br />
-          • Read these guidelines!
+          <br />• Read these guidelines!
         </div>
       </div>
 
       <div>
-        <div className="my-4 text-3xl font-bold">When you're ready to start getting suggestions:</div>
+        <div className="my-4 text-3xl font-bold">
+          When you're ready to start getting suggestions:
+        </div>
         <div className="mb-10 text-lg font-mono">
           • Press "Get Started" at the bottom of this page.
           <br />
           • You will be presented with a book and some information about it.
           <br />
-          • Click the "check mark" if you might like the book shown based on that information, or the "X" if you dont like it.
+          • Click the "check mark" if you might like the book shown based on
+          that information, or the "X" if you dont like it.
           <br />• Continue until there are no more left!
         </div>
       </div>
@@ -59,7 +61,8 @@ const Rules: React.FC = () => {
       <div>
         <div className="my-4 text-3xl font-bold">Once you are done:</div>
         <div className="mb-10 text-lg font-mono">
-          We will give you 2 recommendations of books you might like based on your choices.
+          We will give you 2 recommendations of books you might like based on
+          your choices.
         </div>
       </div>
       <Button>
