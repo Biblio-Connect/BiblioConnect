@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import Rules from "./pages/rules";
 
 const AppRoutes = ({
   onLogin,
@@ -22,6 +23,7 @@ const AppRoutes = ({
     <Route path="/login" element={<Login onLogin={onLogin} />} />
     <Route path="/signup" element={<Signup onSignup={onSignup} />} />
     <Route path="/profile" element={<Profile />} />
+    <Route path="/rules" element={<Rules />} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 );
