@@ -1,16 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "../contexts/themeContext";
 import { FaArrowRight } from "react-icons/fa";
 import LinkButton from "../components/LinkButton";
 
 function Profile() {
   const { theme } = useTheme();
+  const [genres, setGenres] = useState<string[]>([]);
+
   useEffect(() => {
     document.title = "Profile - BiblioConnect";
     const email = localStorage.getItem("email");
     if (!email) {
       window.location.href = "/login";
     }
+
+    const recommendedBooks = async () => {
+      const response = await fetch("http://localhost:3333/api/");
+      const data = await response.json();
+      console.log(data);
+    }
+    recommendedBooks();
   }, []);
 
   return (
