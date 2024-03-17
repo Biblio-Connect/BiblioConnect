@@ -136,7 +136,7 @@ const Binder: React.FC = () => {
           <p
             className={`mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
           >
-            {books[bookIndex].Chapters}
+            `Chapters ${books[bookIndex].Chapters}`
           </p>
           <p
             className={`mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
