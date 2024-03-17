@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 type Book = {
+  BookID: number;
   Author: string;
   Chapters: string;
   Description: string;
   Genres: string;
   ImageURL: string;
   Name: string;
+  Guidance: string;
 };
 
 const Binder: React.FC = () => {
@@ -21,6 +23,8 @@ const Binder: React.FC = () => {
     Genres: "undef",
     ImageURL: "undef",
     Name: "undef",
+    Guidance: "undef",
+    BookID: 0
   }]);
 
   const getBooks = async () => {
@@ -36,8 +40,6 @@ const Binder: React.FC = () => {
 
   const nextBook = () => {
     if(bookIndex === books.length - 1){
-      const navigate = useNavigate();
-      navigate("/profile");
       return;
     }
     if(books.length > 0 && bookIndex < books.length - 1){
@@ -58,7 +60,7 @@ const Binder: React.FC = () => {
     const response = await fetch("http://localhost:3333/api/likedBooks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ book_id: books[bookIndex], email: localStorage.getItem("email") }),
+      body: JSON.stringify({ book_id: books[bookIndex].BookID, email: localStorage.getItem("email") }),
     });
     const data = await response.json();
     console.log(data);
@@ -99,7 +101,7 @@ const Binder: React.FC = () => {
             />
           </div>
           <div className="flex-grow flex justify-center">
-            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => sendLikedBook()}>
+            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => {sendLikedBook(); nextBook()}}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
