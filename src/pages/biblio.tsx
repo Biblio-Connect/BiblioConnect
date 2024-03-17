@@ -5,9 +5,9 @@ const Binder: React.FC = () => {
   const { theme } = useTheme();
   return (
     <div
-      className={`min-w-screen  ${theme === "light" ? "bg-light-mode text-ultra-dark-mode" : "bg-dark-mode text-light-mode"}`}
+      className={`${theme === "light" ? "bg-light-mode text-ultra-dark-mode" : "bg-dark-mode text-light-mode"}`}
     >
-      <div className="min-h-screen flex flex-col items-center w-screen">
+      <div className="min-h-screen flex flex-col items-center">
         <div className=" flex flex-row items-center my-4 justify-center w-full">
           <div className="flex-grow flex justify-center">
             <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
