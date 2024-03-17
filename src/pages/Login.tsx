@@ -4,12 +4,13 @@ import { useTheme } from "../contexts/themeContext";
 import { useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 
-interface ButtonProps {
+interface LinkButtonProps {
+  link: string;
   children: React.ReactNode;
-  onClick: () => void; // Add onClick prop
 }
 
-const Button: React.FC<ButtonProps> = ({ children, onClick }) => {
+const LinkButton: React.FC<LinkButtonProps> = ({ link, children }) => {
+  const navigate = useNavigate();
   const { theme } = useTheme();
 
   const buttonClass = `flex items-center justify-center w-full my-1 py-2 font-medium border border-transparent rounded-lg hover:border-indigo-600 cursor-pointer transition-colors duration-200 ${
@@ -18,8 +19,12 @@ const Button: React.FC<ButtonProps> = ({ children, onClick }) => {
       : "bg-ultra-dark-mode text-light-mode"
   }`;
 
+  const goToPage = () => {
+    navigate(link);
+  };
+
   return (
-    <button className={buttonClass} onClick={onClick}>
+    <button className={buttonClass} onClick={goToPage}>
       {children}
     </button>
   );
@@ -55,7 +60,7 @@ const handleLogin = async (email: string, password: string, go: () => void) => {
 };
 
 const Login = () => {
-  const navigate = useNavigate(); // Get the navigate function here
+  const navigate = useNavigate();
   const { theme } = useTheme();
 
   const goToRules = () => {
@@ -73,10 +78,10 @@ const Login = () => {
             handleLogin(email, password, () => goToRules())
           }
         />
-        <Button onClick={() => navigate("/signup")}>
+        <LinkButton link="/signup">
           <FaArrowRight className="mr-2" />
           Create an account
-        </Button>
+        </LinkButton>
       </div>
     </div>
   );

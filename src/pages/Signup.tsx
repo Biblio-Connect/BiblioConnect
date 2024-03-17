@@ -4,11 +4,12 @@ import { useTheme } from "../contexts/themeContext";
 import { useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 
-interface ButtonProps {
+interface LinkButtonProps {
+  link: string;
   children: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({ children }) => {
+const LinkButton: React.FC<LinkButtonProps> = ({ link, children }) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
 
@@ -19,7 +20,7 @@ const Button: React.FC<ButtonProps> = ({ children }) => {
   }`;
 
   const goToPage = () => {
-    navigate("/login");
+    navigate(link);
   };
 
   return (
@@ -29,23 +30,58 @@ const Button: React.FC<ButtonProps> = ({ children }) => {
   );
 };
 
-interface SignupProps {
-  onSignup: (email: string, password: string) => void;
-}
+const handleSignup = async (email: string, password: string, go: () => void) => {
+  try {
+    const response = await fetch("http://localhost:3333/api/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    if (response.status === 401) {
+      console.error("Server error");
+      return;
+    }
+    const data = await response.json();
+    console.log(
+      "Data from API",
+      JSON.stringify({ email: data.email, message: data.message }),
+    );
+    if (data.email) {
+      localStorage.setItem("email", data.email);
+      console.log("Signup in successfully with token:", data.email);
+      go();
+    } else {
+      console.log(data.message);
+    }
+  } catch (err) {
+    console.error("Error during signup:", err);
+    console.error("An error occurred. Please try again.");
+  }
+};
 
-const Signup: React.FC<SignupProps> = ({ onSignup }) => {
+const Signup = () => {
+  const navigate = useNavigate();
   const { theme } = useTheme();
+
+  const goToLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <div className="flex justify-center items-center h-full">
       <div
         className={`max-w-md w-full p-6 rounded-md shadow-md ${theme === "light" ? "bg-ultra-light-mode text-ultra-dark-mode" : "bg-ultra-dark-mode text-light-mode"}`}
       >
         <h2 className="text-2xl font-semibold text-center">Sign Up</h2>
-        <SignupForm onSignup={onSignup} />
-        <Button>
+        <SignupForm
+          onSignup={(email, password) =>
+            handleSignup(email, password, () => goToLogin())
+          }
+        />
+        <LinkButton link="/login">
           <FaArrowRight className="mr-2" />
           Already have an account? Login
-        </Button>
+        </LinkButton>
       </div>
     </div>
   );
