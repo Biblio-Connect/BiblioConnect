@@ -6,7 +6,11 @@ import LinkButton from "../components/LinkButton";
 function Profile() {
   const { theme } = useTheme();
   useEffect(() => {
-    document.title = "Home - BiblioConnect";
+    document.title = "Profile - BiblioConnect";
+    const email = localStorage.getItem("email");
+    if (!email) {
+      window.location.href = "/login";
+    }
   }, []);
 
   return (

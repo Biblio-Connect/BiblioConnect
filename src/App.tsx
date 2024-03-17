@@ -10,21 +10,12 @@ import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import HowItWorks from "./pages/HowItWorks";
 
-const handleSignup = (email: string, password: string) => {
-  // Implement signup logic here
-  console.log("Signing up with:", email, password);
-};
-
-const AppRoutes = ({
-  onSignup,
-}: {
-  onSignup: (email: string, password: string) => void;
-}) => (
+const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/binder" element={<Binder />} />
     <Route path="/login" element={<Login />} />
-    <Route path="/signup" element={<Signup onSignup={onSignup} />} />
+    <Route path="/signup" element={<Signup />} />
     <Route path="/profile" element={<Profile />} />
     <Route path="/howitworks" element={<HowItWorks />} />
     <Route path="*" element={<NotFound />} />
@@ -36,7 +27,7 @@ const App: React.FC = () => {
     <ThemeProvider>
       <Router>
         <Layout>
-          <AppRoutes onSignup={handleSignup} />
+          <AppRoutes />
         </Layout>
       </Router>
     </ThemeProvider>
