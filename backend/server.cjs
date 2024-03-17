@@ -178,13 +178,25 @@ app.get("/api/thriller", (req, res) => {
 app.get("/api/genre", (req, res) => {
     console.log("API Request:", req.url);
     const statement = `
-    SELECT GenreCounts.Genres, MAX(LikedCount) AS MaxLikedCount
+
+    SELECT GenreCounts.Genres, GenreCounts.LikedCount AS MaxLikedCount
     FROM (
-        SELECT Books.Genres, COUNT(SwipeOutput.BookID) AS LikedCount
+        SELECT Books.Genres, COUNT(*) AS LikedCount
         FROM Books
-        NATURAL JOIN SwipeOutput 
+        JOIN SwipeOutput ON Books.BookID = SwipeOutput.BookID
         GROUP BY Books.Genres
-    ) AS GenreCounts;`;
+    ) AS GenreCounts
+    JOIN (
+        SELECT MAX(LikedCount) AS MaxLikedCount
+        FROM (
+            SELECT COUNT(*) AS LikedCount
+            FROM Books
+            JOIN SwipeOutput ON Books.BookID = SwipeOutput.BookID
+            GROUP BY Books.Genres
+        ) AS MaxCounts
+    ) AS MaxLikedCounts
+    ON GenreCounts.LikedCount = MaxLikedCounts.MaxLikedCount;`;
+
     db.all(statement, (err, rows) => {
       if (err) {
         res.status(500).json({ error: err.message });
