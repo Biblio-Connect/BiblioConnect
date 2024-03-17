@@ -52,8 +52,8 @@ const App: React.FC = () => {
       console.error("Error during login:", err);
       console.error("An error occurred. Please try again.");
     }
+    console.log("Logging in with:", email, password);
   };
-  console.log("Logging in with:", email, password);
 
   const handleSignup = (email: string, password: string) => {
     // Implement signup logic here

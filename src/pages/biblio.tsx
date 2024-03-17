@@ -1,10 +1,18 @@
 import React from "react";
 import { useTheme } from "../contexts/themeContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Binder: React.FC = () => {
   const [profileIndex, setProfileIndex] = useState(0);
-  const profiles = ['Author', 'Genres', 'Chapter', 'Description']; // Replace this with your actual profiles
+  const profiles = ["Author", "Genres", "Chapter", "Description"]; // Replace this with your actual profiles
+
+  const getItems = async () => {
+    const items = await fetch("/api/items");
+    console.log(items);
+  };
+  useEffect(() => {
+    getItems();
+  }, []);
 
   const handleButtonClick = () => {
     setProfileIndex((prevIndex) => (prevIndex + 1) % profiles.length);
@@ -88,7 +96,7 @@ const Binder: React.FC = () => {
           </p>
         </div>
       </div>
-      
+
       <div>
         <div>
           <button onClick={handleButtonClick}>Green Button</button>
