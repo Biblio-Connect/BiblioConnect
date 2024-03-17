@@ -205,7 +205,6 @@ app.get("/api/genre", (req, res) => {
       res.json(rows);
     });
   });
-
 // add likedBooks
 app.post("/api/likedBooks", async (req, res) => {
   const { Book_id } = req.body;

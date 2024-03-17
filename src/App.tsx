@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./contexts/themeContext";
 import Layout from "./layouts/Layout";
 import Home from "./pages/Home";
@@ -14,17 +10,20 @@ import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import Rules from "./pages/rules";
 
+const handleSignup = (email: string, password: string) => {
+  // Implement signup logic here
+  console.log("Signing up with:", email, password);
+};
+
 const AppRoutes = ({
-  onLogin,
   onSignup,
 }: {
-  onLogin: (email: string, password: string) => void;
   onSignup: (email: string, password: string) => void;
 }) => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/binder" element={<Binder />} />
-    <Route path="/login" element={<Login onLogin={onLogin} />} />
+    <Route path="/login" element={<Login />} />
     <Route path="/signup" element={<Signup onSignup={onSignup} />} />
     <Route path="/profile" element={<Profile />} />
     <Route path="/rules" element={<Rules />} />
@@ -33,44 +32,11 @@ const AppRoutes = ({
 );
 
 const App: React.FC = () => {
-  const handleLogin = async (email: string, password: string) => {
-    try {
-      const response = await fetch("http://localhost:3333/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-      if (response.status === 401) {
-        console.error("Server error");
-        return;
-      }
-      const data = await response.json();
-      console.log(
-        "Data from API",
-        JSON.stringify({ email: data.email, message: data.message }),
-      );
-      if (data.email) {
-        localStorage.setItem("email", data.email);
-        console.log("Logged in successfully with token:", data.email);
-      } else {
-        console.log(data.message);
-      }
-    } catch (err) {
-      console.error("Error during login:", err);
-      console.error("An error occurred. Please try again.");
-    }
-  };
-
-  const handleSignup = (email: string, password: string) => {
-    // Implement signup logic here
-    console.log("Signing up with:", email, password);
-  };
-
   return (
     <ThemeProvider>
       <Router>
         <Layout>
-          <AppRoutes onLogin={handleLogin} onSignup={handleSignup} />
+          <AppRoutes onSignup={handleSignup} />
         </Layout>
       </Router>
     </ThemeProvider>
