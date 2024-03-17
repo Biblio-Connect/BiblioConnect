@@ -27,6 +27,8 @@ Ready to find your next great read? Sign up for BiblioConnect today and embark o
 - [React](https://react.dev/) - A JavaScript library for building user interfaces.
 - [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework that provides low-level utility classes to build custom designs.
 - [SQLite](https://www.sqlite.org/) - C-language library that implements a small, fast, self-contained SQL database engine.
+- [Typescript](https://www.typescriptlang.org/) - TypeScript is a free and open-source high-level programming language developed by Microsoft that adds static typing with optional type annotations to JavaScript.
+- [Node](https://nodejs.org/en/about) - Node.js is a cross-platform, open-source JavaScript runtime environment.
 
 ## Authors
 
