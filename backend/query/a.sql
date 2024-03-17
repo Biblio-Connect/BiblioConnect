@@ -1,5 +1,6 @@
 DROP Table IF EXISTS Books;
 DROP Table IF EXISTS SwipeOutput;
+DROP Table IF EXISTS Users;
 
 CREATE TABLE Books (
     BookID INTEGER PRIMARY KEY,
@@ -35,7 +36,7 @@ INSERT INTO Books (BookID, Name, Author, Description, Chapters, Guidance, ImageU
 (20, 'Rebecca', 'Daphne du Maurier', 'A young woman marries a wealthy widower, but the shadow of his deceased wife looms large.', '27', 'PG-13', 'https://m.media-amazon.com/images/I/51-OsLmkHBL._SY445_SX342_.jpg', 'Thriller');
 
 CREATE TABLE Users  (
-    User_id INTEGER PRIMARY KEY,
+    User_id INTEGER PRIMARY KEY AUTOINCREMENT,
     Email TEXT NOT NULL,
     Password TEXT NOT NULL
 );

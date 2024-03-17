@@ -3,9 +3,11 @@ const express = require("express");
 const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("book.sqlite3");
+const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3333;
+app.use(bodyParser.json());
 
 
 // Serve Vite output as static files
@@ -19,7 +21,7 @@ app.post("/api/register", async (req, res) => {
     }
     try {
       await db.run(
-        "INSERT INTO users (email, password) VALUES (?, ?, ?)",
+        "INSERT INTO Users (email, password) VALUES (?, ?)",
         [email, password],
       );
       res.status(201).json({ message: "Registration successful" });
@@ -51,6 +53,7 @@ app.post("/api/login", async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({ message: "Missing required fields" });
     }
+    res.status(200).json({message: "Success"});
 });
 
 // get all the initial books
