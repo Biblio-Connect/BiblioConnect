@@ -69,13 +69,7 @@ app.post("/api/login", async (req, res) => {
 app.get("/api/items", (req, res) => {
   console.log("API Request:", req.url);
   const statement = `
-  SELECT
-    ImageURL, 
-    Name, 
-    Author,
-    Genres,
-    Chapters, 
-    Description
+  SELECT *
   FROM Books LIMIT 12;`;
   db.all(statement, (err, rows) => {
     if (err) {
@@ -90,13 +84,7 @@ app.get("/api/items", (req, res) => {
 app.get("/api/fantasy", (req, res) => {
   console.log("API Request:", req.url);
   const statement = `
-    SELECT 
-        ImageURL, 
-        Name, 
-        Author,
-        Genres,
-        Chapters, 
-        Description
+    SELECT *
     FROM Books
     WHERE Author = "C.S. Lewis" OR Author = "Michael Ende";`;
   db.all(statement, (err, rows) => {
@@ -209,7 +197,7 @@ app.get("/api/genre", (req, res) => {
 app.post("/api/likedBooks", async (req, res) => {
   const { book_id, email } = req.body;
   try {
-    await db.run("INSERT INTO SwipeOutput (Book_id, email) VALUES (?, ?)", [
+    await db.run("INSERT INTO SwipeOutput (BookID, Email) VALUES (?, ?)", [
       book_id,
       email,
     ]);

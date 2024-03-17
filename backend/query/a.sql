@@ -13,6 +13,8 @@ CREATE TABLE Books (
     Genres TEXT
 );
 
+
+
 INSERT INTO Books (BookID, Name, Author, Description, Chapters, Guidance, ImageURL, Genres) VALUES
 (1, 'The Lord of the Rings', 'J.R.R. Tolkien', 'An epic journey to destroy a powerful ring and save Middle-earth.', '50+', 'PG-13', 'https://m.media-amazon.com/images/I/51uHK++IekL._SY445_SX342_.jpg', 'Fantasy'),
 (2, 'The Wizard of Earthsea', 'Ursula K. Le Guin', 'A young mage discovers his true power and confronts darkness.', '9', 'PG', 'https://m.media-amazon.com/images/I/81VxGPk9YFL._SY522_.jpg', 'Fantasy'),
@@ -46,3 +48,6 @@ CREATE TABLE SwipeOutput (
     FOREIGN KEY (email) REFERENCES Users(Email),
     FOREIGN KEY (BookID) REFERENCES Books(BookID)
 );
+
+
+INSERT INTO Users (Email, Password) VALUES ("sushi@sean.eric", "jonathan");
