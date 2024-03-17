@@ -51,4 +51,4 @@ CREATE TABLE SwipeOutput (
 );
 
 
-INSERT INTO Users (Email, Password) VALUES ("sushi@sean.eric", "jonathan");
+-- INSERT INTO Users (Email, Password) VALUES ("sushi@sean.eric", "jonathan");

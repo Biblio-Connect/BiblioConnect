@@ -203,16 +203,22 @@ app.get("/api/genre", (req, res) => {
 app.post("/api/likedBooks", async (req, res) => {
   const { book_id, email } = req.body;
   try {
-    await db.run("INSERT INTO SwipeOutput (BookID, Email) VALUES (?, ?)", [
-      book_id,
-      email,
-    ]);
-    res.status(201).json({ message: "Swiped successful" });
+    // Check if the row already exists in the database
+    const existingRow = await db.get("SELECT * FROM SwipeOutput WHERE BookID = ? AND Email = ?", [book_id, email]);
+    if (existingRow) {
+      // If the row already exists, send a 400 Bad Request response
+      res.status(400).json({ message: "Duplicate entry. This book is already liked." });
+    } else {
+      // If the row doesn't exist, insert it into the database
+      await db.run("INSERT INTO SwipeOutput (BookID, Email) VALUES (?, ?)", [book_id, email]);
+      res.status(201).json({ message: "Swiped successful" });
+    }
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Swiped not successful" });
   }
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
