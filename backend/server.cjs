@@ -4,10 +4,12 @@ const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("book.sqlite3");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 3333;
 app.use(bodyParser.json());
+app.use(cors());
 
 // Serve Vite output as static files
 app.use(express.static(path.join(__dirname, "dist")));
@@ -32,9 +34,10 @@ app.post("/api/register", async (req, res) => {
 
 // User login endpoint
 app.post("/api/login", async (req, res) => {
+  console.log("API Request:", req.url);
   const getDatabaseUser = (email) => {
     return new Promise((resolve, reject) => {
-      db.get("SELECT * FROM users WHERE user_name = ?", [email], (err, row) => {
+      db.get("SELECT * FROM Users WHERE Email = ?", [email], (err, row) => {
         if (err) {
           reject(err);
           return;
@@ -48,7 +51,18 @@ app.post("/api/login", async (req, res) => {
   if (!email || !password) {
     return res.status(400).json({ message: "Missing required fields" });
   }
-  res.status(200).json({ message: "Success" });
+  try {
+    const user = await getDatabaseUser(email);
+    if (user && user.Password === password) {
+      console.log("User logged in:", email, password);
+      res.status(200).json({ message: "Login successful", email: user.Email });
+    } else {
+      res.status(401).json({ message: "Invalid credentials" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error during login" });
+  }
 });
 
 // get all the initial books
@@ -182,33 +196,33 @@ app.get("/api/genre", (req, res) => {
 
 // add likedBooks
 app.post("/api/likedBooks", async (req, res) => {
-    const { Book_id } = req.body;
-    try {
-      await db.run(
-        "INSERT INTO SwipeOutput (Book_id, email) VALUES (?)",
-        [Book_id, email],
-      );
-      res.status(201).json({ message: "Swiped successful" });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Swiped not successful" });
-    }
-  });
+  const { Book_id } = req.body;
+  try {
+    await db.run("INSERT INTO SwipeOutput (Book_id, email) VALUES (?)", [
+      Book_id,
+      email,
+    ]);
+    res.status(201).json({ message: "Swiped successful" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Swiped not successful" });
+  }
+});
 
 // Get most liked Genres
 app.post("/api/likedBooks", async (req, res) => {
-    const { Book_id } = req.body;
-    try {
-      await db.run(
-        "INSERT INTO SwipeOutput (Book_id, email) VALUES (?)",
-        [Book_id, email],
-      );
-      res.status(201).json({ message: "Swiped successful" });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Swiped not successful" });
-    }
-  });
+  const { Book_id } = req.body;
+  try {
+    await db.run("INSERT INTO SwipeOutput (Book_id, email) VALUES (?)", [
+      Book_id,
+      email,
+    ]);
+    res.status(201).json({ message: "Swiped successful" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Swiped not successful" });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);

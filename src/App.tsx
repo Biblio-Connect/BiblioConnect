@@ -1,5 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 import { ThemeProvider } from "./contexts/themeContext";
 import Layout from "./layouts/Layout";
 import Home from "./pages/Home";
@@ -31,28 +35,30 @@ const AppRoutes = ({
 const App: React.FC = () => {
   const handleLogin = async (email: string, password: string) => {
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch("http://localhost:3333/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      console.log("Response from api", response);
       if (response.status === 401) {
-        console.log("reached here 401");
         console.error("Server error");
         return;
       }
       const data = await response.json();
-      if (data.token) {
-        localStorage.setItem("token", data.token);
+      console.log(
+        "Data from API",
+        JSON.stringify({ email: data.email, message: data.message }),
+      );
+      if (data.email) {
+        localStorage.setItem("email", data.email);
+        console.log("Logged in successfully with token:", data.email);
       } else {
-        console.error(data.message);
+        console.log(data.message);
       }
     } catch (err) {
       console.error("Error during login:", err);
       console.error("An error occurred. Please try again.");
     }
-    console.log("Logging in with:", email, password);
   };
 
   const handleSignup = (email: string, password: string) => {
