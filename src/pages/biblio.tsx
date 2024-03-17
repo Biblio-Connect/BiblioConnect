@@ -1,7 +1,14 @@
 import React from "react";
 import { useTheme } from "../contexts/themeContext";
+import { useState } from "react";
 
 const Binder: React.FC = () => {
+  const [profileIndex, setProfileIndex] = useState(0);
+  const profiles = ['Author', 'Genres', 'Chapter', 'Description']; // Replace this with your actual profiles
+
+  const handleButtonClick = () => {
+    setProfileIndex((prevIndex) => (prevIndex + 1) % profiles.length);
+  };
   const { theme } = useTheme();
   return (
     <div
@@ -78,6 +85,17 @@ const Binder: React.FC = () => {
             className={`mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
           >
             Description
+          </p>
+        </div>
+      </div>
+      
+      <div>
+        <div>
+          <button onClick={handleButtonClick}>Green Button</button>
+          <p
+            className={`mb-2 ${theme === "light" ? "bg-light-mode text-gray-600" : "bg-dark-mode text-gray-300"}`}
+          >
+            {profiles[profileIndex]}
           </p>
         </div>
       </div>
