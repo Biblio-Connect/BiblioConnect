@@ -165,6 +165,59 @@ app.get("/api/thriller", (req, res) => {
   });
 });
 
+// get the count for genre
+app.get("/api/genre", (req, res) => {
+    console.log("API Request:", req.url);
+    const statement = `
+    SELECT Books.Genres, MAX(LikedCount) AS MaxLikedCount
+    FROM (
+    SELECT 
+        Books.Genres,
+        COUNT(SwipeOutput.BookID) AS LikedCount
+    FROM Books
+    NATURAL JOIN SwipeOutput 
+    GROUP BY Books.Genres
+    ) AS GenreCounts
+    GROUP BY GenreCounts.Genres;`;
+    db.all(statement, (err, rows) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json(rows);
+    });
+  });
+
+// add likedBooks
+app.post("/api/likedBooks", async (req, res) => {
+    const { Book_id } = req.body;
+    try {
+      await db.run(
+        "INSERT INTO SwipeOutput (Book_id, email) VALUES (?)",
+        [Book_id, email],
+      );
+      res.status(201).json({ message: "Swiped successful" });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Swiped not successful" });
+    }
+  });
+
+// Get most liked Genres
+app.post("/api/likedBooks", async (req, res) => {
+    const { Book_id } = req.body;
+    try {
+      await db.run(
+        "INSERT INTO SwipeOutput (Book_id, email) VALUES (?)",
+        [Book_id, email],
+      );
+      res.status(201).json({ message: "Swiped successful" });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Swiped not successful" });
+    }
+  });
+
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });

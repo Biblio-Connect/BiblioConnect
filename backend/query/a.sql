@@ -36,14 +36,13 @@ INSERT INTO Books (BookID, Name, Author, Description, Chapters, Guidance, ImageU
 (20, 'Rebecca', 'Daphne du Maurier', 'A young woman marries a wealthy widower, but the shadow of his deceased wife looms large.', '27', 'PG-13', 'https://m.media-amazon.com/images/I/51-OsLmkHBL._SY445_SX342_.jpg', 'Thriller');
 
 CREATE TABLE Users  (
-    User_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    Email TEXT NOT NULL,
+    Email TEXT PRIMARY KEY,
     Password TEXT NOT NULL
 );
 
 CREATE TABLE SwipeOutput (
-    User_id INTEGER,
-    Book_id INTEGER,
-    FOREIGN KEY (User_id) REFERENCES Users(User_id),
-    FOREIGN KEY (Book_id) REFERENCES Books(BookID)
+    BookID INTEGER,
+    Email TEXT,
+    FOREIGN KEY (email) REFERENCES Users(Email),
+    FOREIGN KEY (BookID) REFERENCES Books(BookID)
 );
