@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../contexts/themeContext";
 import { FaArrowLeft } from "react-icons/fa";
@@ -7,22 +7,36 @@ interface ButtonProps {
   children: React.ReactNode;
 }
 
-const HomeButton: React.FC<ButtonProps> = ({ children }) => {
+const Button: React.FC<ButtonProps> = ({ children }) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
 
-  const buttonClass = `flex justify-center items-center mx-2 my-1 px-4 py-2 font-medium border border-transparent rounded-lg hover:border-indigo-600 cursor-pointer transition-colors duration-200 ${
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const buttonClass = `flex items-center justify-center mx-2 my-1 px-4 py-2 text-2xl font-medium border border-transparent rounded-lg hover:border-indigo-600 cursor-pointer transition-colors duration-200 ${
     theme === "light"
       ? "bg-ultra-light-mode text-ultra-dark-mode"
       : "bg-ultra-dark-mode text-light-mode"
-  }`;
+  } ${isSmallScreen ? "text-4xl px-8 py-4" : ""}`;
 
-  const goToHomePage = () => {
+  const goToPage = () => {
     navigate("/");
   };
 
   return (
-    <button className={buttonClass} onClick={goToHomePage}>
+    <button className={buttonClass} onClick={goToPage}>
       {children}
     </button>
   );
@@ -45,10 +59,10 @@ const NotFound: React.FC = () => {
       <p className="mb-4 mx-4 font-bold">
         The page you are looking for does not exist
       </p>
-      <HomeButton>
+      <Button>
         <FaArrowLeft className="mr-2" />
         Go back to safety
-      </HomeButton>
+      </Button>
     </div>
   );
 };
