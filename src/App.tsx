@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
-import Rules from "./pages/rules";
+import HowItWorks from "./pages/HowItWorks";
 
 const handleSignup = (email: string, password: string) => {
   // Implement signup logic here
@@ -26,7 +26,7 @@ const AppRoutes = ({
     <Route path="/login" element={<Login />} />
     <Route path="/signup" element={<Signup onSignup={onSignup} />} />
     <Route path="/profile" element={<Profile />} />
-    <Route path="/rules" element={<Rules />} />
+    <Route path="/howitworks" element={<HowItWorks />} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 );

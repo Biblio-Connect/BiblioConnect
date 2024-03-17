@@ -6,28 +6,34 @@ import { FaMoon, FaSun } from "react-icons/fa";
 
 const links = [
   { to: "/", text: "Home" },
+  { to: "/howitworks", text: "How It works" },
   { to: "/profile", text: "Profile" },
 ];
 
 const Links: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
   const location = useLocation();
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   return (
-    <>
+    <div style={{ 
+      display: 'flex', 
+      flexDirection: isMobile ? 'column' : 'row', 
+      justifyContent: 'center',
+      gap: '10px'
+    }}>
       {links.map((link) => (
         <Link
           key={link.to}
           to={link.to}
-          className={`py-4 px-4 text-center hover:font-extrabold text-4xl md:text-lg ${
+          className={`py-4 mx-10 text-center hover:font-extrabold text-4xl md:text-lg ${
             location.pathname === link.to ? "font-extrabold" : ""
           }`}
           onClick={onClick}
-          style={{ width: "100px" }}
         >
           {link.text}
         </Link>
       ))}
-    </>
+    </div>
   );
 };
 

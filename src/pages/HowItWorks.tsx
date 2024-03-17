@@ -28,7 +28,7 @@ const Button: React.FC<ButtonProps> = ({ children }) => {
   );
 };
 
-const Rules: React.FC = () => {
+const HowItWorks: React.FC = () => {
   const { theme } = useTheme();
   return (
     <div
@@ -73,4 +73,4 @@ const Rules: React.FC = () => {
   );
 };
 
-export default Rules;
+export default HowItWorks;
