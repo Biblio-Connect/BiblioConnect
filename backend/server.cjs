@@ -219,11 +219,6 @@ app.post("/api/likedBooks", async (req, res) => {
   }
 });
 
-
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
-});
-
 // Delete Certain User's Data
 app.post("/api/deleteData", async (req, res) => {
     const { Email } = req.body;
