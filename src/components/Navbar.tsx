@@ -15,12 +15,14 @@ const Links: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   return (
-    <div style={{ 
-      display: 'flex', 
-      flexDirection: isMobile ? 'column' : 'row', 
-      justifyContent: 'center',
-      gap: '10px'
-    }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        justifyContent: "center",
+        gap: "10px",
+      }}
+    >
       {links.map((link) => (
         <Link
           key={link.to}

@@ -16,16 +16,18 @@ type Book = {
 
 const Binder: React.FC = () => {
   const [bookIndex, setBookIndex] = useState(0);
-  const [books, setBooks] = useState<Book[]>([{
-    Author: "undef",
-    Chapters: "undef",
-    Description: "undef",
-    Genres: "undef",
-    ImageURL: "undef",
-    Name: "undef",
-    Guidance: "undef",
-    BookID: 0
-  }]);
+  const [books, setBooks] = useState<Book[]>([
+    {
+      Author: "undef",
+      Chapters: "undef",
+      Description: "undef",
+      Genres: "undef",
+      ImageURL: "undef",
+      Name: "undef",
+      Guidance: "undef",
+      BookID: 0,
+    },
+  ]);
 
   const getBooks = async () => {
     const response = await fetch("http://localhost:3333/api/items");
@@ -39,33 +41,35 @@ const Binder: React.FC = () => {
   }, []);
 
   const nextBook = () => {
-    if(bookIndex === books.length - 1){
+    if (bookIndex === books.length - 1) {
       return;
     }
-    if(books.length > 0 && bookIndex < books.length - 1){
+    if (books.length > 0 && bookIndex < books.length - 1) {
       setBookIndex((prevIndex) => (prevIndex + 1) % books.length);
     }
   };
 
   const sendLikedBook = async () => {
     const emailFromStorage = localStorage.getItem("email");
-    if(!emailFromStorage){
+    if (!emailFromStorage) {
       console.log("No email in local storage");
       return;
     }
-    if(books.length === 0 || bookIndex >= books.length || bookIndex < 0){
+    if (books.length === 0 || bookIndex >= books.length || bookIndex < 0) {
       console.log("No books in array or index out of bounds");
       return;
     }
     const response = await fetch("http://localhost:3333/api/likedBooks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ book_id: books[bookIndex].BookID, email: localStorage.getItem("email") }),
+      body: JSON.stringify({
+        book_id: books[bookIndex].BookID,
+        email: localStorage.getItem("email"),
+      }),
     });
     const data = await response.json();
     console.log(data);
   };
-
 
   const { theme } = useTheme();
 
@@ -76,7 +80,10 @@ const Binder: React.FC = () => {
       <div className="min-h-screen flex flex-col items-center">
         <div className=" flex flex-row items-center my-4 justify-center w-full">
           <div className="flex-grow flex justify-center">
-            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => nextBook()}>
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => nextBook()}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -101,7 +108,13 @@ const Binder: React.FC = () => {
             />
           </div>
           <div className="flex-grow flex justify-center">
-            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => {sendLikedBook(); nextBook()}}>
+            <button
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => {
+                sendLikedBook();
+                nextBook();
+              }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -147,7 +160,7 @@ const Binder: React.FC = () => {
           </p>
         </div>
       </div>
-      </div>
+    </div>
   );
 };
 

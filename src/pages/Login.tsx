@@ -69,7 +69,9 @@ const Login = () => {
       >
         <h2 className="text-2xl font-semibold text-center">Login</h2>
         <LoginForm
-          onLogin={(email, password) => handleLogin(email, password, () => goToRules())}
+          onLogin={(email, password) =>
+            handleLogin(email, password, () => goToRules())
+          }
         />
         <Button onClick={() => navigate("/signup")}>
           <FaArrowRight className="mr-2" />
