@@ -1,6 +1,7 @@
 import React from "react";
 import { useTheme } from "../contexts/themeContext";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 type Book = {
   Author: string;
@@ -33,11 +34,37 @@ const Binder: React.FC = () => {
     getBooks();
   }, []);
 
-  const handleButtonClick = () => {
+  const nextBook = () => {
+    if(bookIndex === books.length - 1){
+      const navigate = useNavigate();
+      navigate("/profile");
+      return;
+    }
     if(books.length > 0 && bookIndex < books.length - 1){
-    setBookIndex((prevIndex) => (prevIndex + 1) % books.length);}
+      setBookIndex((prevIndex) => (prevIndex + 1) % books.length);
+    }
   };
-  
+
+  const sendLikedBook = async () => {
+    const emailFromStorage = localStorage.getItem("email");
+    if(!emailFromStorage){
+      console.log("No email in local storage");
+      return;
+    }
+    if(books.length === 0 || bookIndex >= books.length || bookIndex < 0){
+      console.log("No books in array or index out of bounds");
+      return;
+    }
+    const response = await fetch("http://localhost:3333/api/likedBooks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ book_id: books[bookIndex], email: localStorage.getItem("email") }),
+    });
+    const data = await response.json();
+    console.log(data);
+  };
+
+
   const { theme } = useTheme();
 
   return (
@@ -47,7 +74,7 @@ const Binder: React.FC = () => {
       <div className="min-h-screen flex flex-col items-center">
         <div className=" flex flex-row items-center my-4 justify-center w-full">
           <div className="flex-grow flex justify-center">
-            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleButtonClick()}>
+            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => nextBook()}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -72,7 +99,7 @@ const Binder: React.FC = () => {
             />
           </div>
           <div className="flex-grow flex justify-center">
-            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleButtonClick()}>
+            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => sendLikedBook()}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

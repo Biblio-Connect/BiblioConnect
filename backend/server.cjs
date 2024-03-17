@@ -178,7 +178,6 @@ app.get("/api/thriller", (req, res) => {
 app.get("/api/genre", (req, res) => {
   console.log("API Request:", req.url);
   const statement = `
-
     SELECT GenreCounts.Genres, GenreCounts.LikedCount AS MaxLikedCount
     FROM (
         SELECT Books.Genres, COUNT(*) AS LikedCount
@@ -205,27 +204,13 @@ app.get("/api/genre", (req, res) => {
     res.json(rows);
   });
 });
+
 // add likedBooks
 app.post("/api/likedBooks", async (req, res) => {
-  const { Book_id } = req.body;
+  const { book_id, email } = req.body;
   try {
-    await db.run("INSERT INTO SwipeOutput (Book_id, email) VALUES (?)", [
-      Book_id,
-      email,
-    ]);
-    res.status(201).json({ message: "Swiped successful" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Swiped not successful" });
-  }
-});
-
-// Get most liked Genres
-app.post("/api/likedBooks", async (req, res) => {
-  const { Book_id } = req.body;
-  try {
-    await db.run("INSERT INTO SwipeOutput (Book_id, email) VALUES (?)", [
-      Book_id,
+    await db.run("INSERT INTO SwipeOutput (Book_id, email) VALUES (?, ?)", [
+      book_id,
       email,
     ]);
     res.status(201).json({ message: "Swiped successful" });
