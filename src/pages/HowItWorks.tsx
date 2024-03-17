@@ -1,46 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useTheme } from "../contexts/themeContext";
-import { useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
-
-interface ButtonProps {
-  children: React.ReactNode;
-}
-
-const Button: React.FC<ButtonProps> = ({ children }) => {
-  const navigate = useNavigate();
-  const { theme } = useTheme();
-  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 768);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const buttonClass = `flex items-center justify-center mx-2 my-1 px-4 py-2 text-2xl font-medium border border-transparent rounded-lg hover:border-indigo-600 cursor-pointer transition-colors duration-200 ${
-    theme === "light"
-      ? "bg-ultra-light-mode text-ultra-dark-mode"
-      : "bg-ultra-dark-mode text-light-mode"
-  } ${isSmallScreen ? "text-4xl px-8 py-4" : ""}`;
-
-  const goToPage = () => {
-    navigate("/binder");
-  };
-
-  return (
-    <button className={buttonClass} onClick={goToPage}>
-      {children}
-    </button>
-  );
-};
+import LinkButton from "../components/LinkButton";
 
 const HowItWorks: React.FC = () => {
   const { theme } = useTheme();
@@ -79,10 +40,10 @@ const HowItWorks: React.FC = () => {
           your choices.
         </div>
       </div>
-      <Button>
+      <LinkButton link="/binder">
         <FaArrowRight className="mr-2" />
         Get started
-      </Button>
+      </LinkButton>
     </div>
   );
 };
