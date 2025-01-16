@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
         {getLinkElement("https://seanfinch.com", "Sean Finch")},{" "}
         {getLinkElement("https://github.com/EricHuang05", "Eric Huang")}, and{" "}
         {getLinkElement("https://shishirpokhrel.com", "Shishir Pokhrel")} • Made
-        for {getLinkElement("https://pawhacks.io", "PawHacks 2024")}
+        for {getLinkElement("https://web.archive.org/web/20241229024348/https://pawhacks.io/", "PawHacks 2024")}
       </p>
     </footer>
   );
